@@ -1,26 +1,27 @@
-function isLengthValid(str, len) {
-  return str.length <= len;
+function isLengthValid(input, len) {
+  return input.toString().length <= len;
 }
 console.log(isLengthValid('test', 5));// eslint-disable-line no-console
 
-function isPalindrome(str) {
-  const validateStroke = str.replaceAll(' ', '').toLowerCase();
+function isPalindrome(input) {
+  const validateStroke = input.toString().replaceAll(' ', '').toLowerCase();
   const reversedStroke = validateStroke.split('').reverse().join('');
   return validateStroke === reversedStroke;
 }
 console.log(isPalindrome('А роза упала на лапу Азора'));// eslint-disable-line no-console
 
-function number(str) {
+function getDigit(input) {
+  if (typeof input === 'number') {
+    return Math.abs(input);
+  }
+  const str = input.toString().replaceAll(' ', '');
   let result = '';
-  const validateStroke = str.replaceAll(' ', '');
-  if (validateStroke) {
-    for (let i = 0; i < validateStroke.length; i++) {
-      if (!isNaN(validateStroke[i])) {
-        result += validateStroke[i];
-      }
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] >= '0' && str[i] <= '9') {
+      result += str[i];
     }
   }
-  return result;
+  return result ? Number(result) : NaN;
 }
 
-console.log(number('а я томат и жизни рад'));// eslint-disable-line no-console
+console.log(getDigit('а я томат, железный ламинат-31231'));// eslint-disable-line no-console
