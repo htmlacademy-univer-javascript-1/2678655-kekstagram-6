@@ -1,4 +1,5 @@
-const PHOTO_COUNT = 25
+const PHOTO_COUNT = 25;
+
 const MESSAGE = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -7,6 +8,7 @@ const MESSAGE = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
+
 const DESCRIPTION = [
   'На отдыхе в Анапе',
   'Ослепительное садовое кольцо',
@@ -19,6 +21,7 @@ const DESCRIPTION = [
   'Весенний парк в цвету',
   'Пикник на лугу с друзьями'
 ];
+
 const NAME = [
   'Макар',
   'Артем',
@@ -33,10 +36,19 @@ const NAME = [
   'Михаил',
   'Кирилл',
   'Егор',
-  'Павел',
+  'Павел'
 ];
 
 const usedNumbers = new Set();
+
+const getRandomInteger = (a, b) => {
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
+  const result = Math.random() * (upper - lower + 1) + lower;
+  return Math.floor(result);
+};
+
+const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 const getRandomUniqueInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -45,6 +57,7 @@ const getRandomUniqueInteger = (a, b) => {
   if (usedNumbers.size >= (upper - lower + 1)) {
     usedNumbers.clear();
   }
+
   let result;
   do {
     result = Math.floor(Math.random() * (upper - lower + 1)) + lower;
@@ -54,28 +67,27 @@ const getRandomUniqueInteger = (a, b) => {
   return result;
 };
 
-const getCount = () => {
-  let countId = 0;
-  return function () {
-      return ++countId;
-  }
-}
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-};
-
 const getRandomMessage = () => {
   const count = getRandomInteger(1, 2);
   const messages = Array.from({length: count}, () => getRandomArrayElement(MESSAGE));
   return messages.join(' ');
 };
 
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+const getCount = () => {
+  let countId = 0;
+  return function () {
+    return ++countId;
+  };
+};
 
 const createSequentialId = getCount();
+
+const createComment = () => ({
+  id: getRandomUniqueInteger(40, 500),
+  avatar: `img/avatar-${getRandomUniqueInteger(1, 6)}.svg`,
+  message: getRandomMessage(),
+  name: getRandomArrayElement(NAME)
+});
 
 const createPhoto = () => {
   const id = createSequentialId();
@@ -84,17 +96,9 @@ const createPhoto = () => {
     url: `photos/${id}.jpg`,
     description: getRandomArrayElement(DESCRIPTION),
     likes: getRandomInteger(15, 200),
-    comments: Array.from({length: getRandomUniqueInteger(1, 6)}, createComment)
+    comments: Array.from({length: getRandomUniqueInteger(0, 30)}, createComment)
   };
 };
 
-const createComment = () => ({
-  id: getRandomUniqueInteger(40,500),
-  avatar: `img/avatar-${getRandomUniqueInteger(1,6)}.svg`,
-  message: getRandomMessage(),
-  name: getRandomArrayElement(NAME)
-})
+export const similarPhoto = Array.from({length: PHOTO_COUNT}, createPhoto);
 
-const similarPhoto = Array.from({length: PHOTO_COUNT}, createPhoto);
-
-console.log(similarPhoto)
