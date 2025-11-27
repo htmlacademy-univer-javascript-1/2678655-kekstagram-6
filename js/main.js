@@ -83,7 +83,7 @@ const getCount = () => {
 const createSequentialId = getCount();
 
 const createComment = () => ({
-  id: getRandomUniqueInteger(40, 500),
+  id: getRandomUniqueInteger(40, 999),
   avatar: `img/avatar-${getRandomUniqueInteger(1, 6)}.svg`,
   message: getRandomMessage(),
   name: getRandomArrayElement(NAME)
