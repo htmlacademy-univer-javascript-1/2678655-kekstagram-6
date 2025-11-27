@@ -3,7 +3,7 @@ export const COMMENT_COUNT = 30;
 export const COMMENT_ID = 999;
 export const AVATAR_COUNT = 6;
 export const LIKES_COUNT_MAX = 200;
-export const LIKES_COUNT_MIN = 200;
+export const LIKES_COUNT_MIN = 15;
 
 export const MESSAGE = [
   'Всё отлично!',
