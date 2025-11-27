@@ -83,7 +83,7 @@ const getCount = () => {
 const createSequentialId = getCount();
 
 const createComment = () => ({
-  id: getRandomUniqueInteger(40, 999),
+  id: getRandomUniqueInteger(1, 999),
   avatar: `img/avatar-${getRandomUniqueInteger(1, 6)}.svg`,
   message: getRandomMessage(),
   name: getRandomArrayElement(NAME)
@@ -101,4 +101,3 @@ const createPhoto = () => {
 };
 
 export const similarPhoto = Array.from({length: PHOTO_COUNT}, createPhoto);
-
