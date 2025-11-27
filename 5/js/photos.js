@@ -1,4 +1,4 @@
-import { PHOTO_COUNT, DESCRIPTION } from './data.js';
+import { PHOTO_COUNT, DESCRIPTION,LIKES_COUNT_MIN,LIKES_COUNT_MAX } from './data.js';
 import { createSequentialId, getRandomInteger, getRandomArrayElement } from './utils.js';
 import { createComments } from './comments.js';
 
@@ -8,7 +8,7 @@ const createPhoto = () => {
     id,
     url: `photos/${id}.jpg`,
     description: getRandomArrayElement(DESCRIPTION),
-    likes: getRandomInteger(15, 200),
+    likes: getRandomInteger(LIKES_COUNT_MIN, LIKES_COUNT_MAX),
     comments: createComments()
   };
 };
