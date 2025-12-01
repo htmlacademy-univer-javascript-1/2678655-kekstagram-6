@@ -1,9 +1,9 @@
 import { PHOTO_COUNT, DESCRIPTION,LIKES_COUNT_MIN,LIKES_COUNT_MAX } from './data.js';
-import { createSequentialId, getRandomInteger, getRandomArrayElement } from './utils.js';
+import { createSequentialIdPhoto, getRandomInteger, getRandomArrayElement } from './utils.js';
 import { createComments } from './comments.js';
 
 const createPhoto = () => {
-  const id = createSequentialId();
+  const id = createSequentialIdPhoto();
   return {
     id,
     url: `photos/${id}.jpg`,
@@ -13,4 +13,4 @@ const createPhoto = () => {
   };
 };
 
-export const similarPhoto = () => Array.from({ length: PHOTO_COUNT }, createPhoto);
+export const createPhotos = () => Array.from({ length: PHOTO_COUNT }, createPhoto);
