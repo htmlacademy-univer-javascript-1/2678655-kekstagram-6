@@ -39,17 +39,18 @@ const renderComments = (comments) => {
   bigComments.insertAdjacentHTML('beforeend', commentsHtml);
 };
 
-const closePicture = () => {
+
+function closePicture() {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-};
+}
 
-const onDocumentKeydown = (event) => {
+function onDocumentKeydown (event){
   if (isEscapeKey(event)) {
     closePicture();
   }
-};
+}
 
 const fillPictureData = (picture) => {
   const smallImg = picture.querySelector('.picture__img');
@@ -83,14 +84,12 @@ const showPictureModal = () => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-function openPicture(picture) {
+const openPicture = (picture) => {
   fillPictureData(picture);
   showPictureModal();
-}
+};
 
-closeButton.addEventListener('click', () => {
-  closePicture();
-});
+closeButton.addEventListener('click', closePicture);
 
 container.addEventListener('click', (event) => {
   const picture = event.target.closest('.picture');
