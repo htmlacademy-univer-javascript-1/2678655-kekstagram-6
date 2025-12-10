@@ -28,35 +28,34 @@ function closePicture() {
 }
 
 function onDocumentKeydown (event){
-  event.preventDefault()
+  event.preventDefault();
   if (isEscapeKey(event)) {
     closePicture();
   }
 }
+const fillPictureData = (picture) => {
+  const smallImg = picture.querySelector('.picture__img');
+  const likes = picture.querySelector('.picture__likes').textContent;
+  const commentsCount = picture.querySelector('.picture__comments').textContent;
+  const photoId = getPhotoIdFromSrc(smallImg.src);
+  const photo = findPhotoById(photoId);
 
-  const fillPictureData = (picture) => {
-    const smallImg = picture.querySelector('.picture__img');
-    const likes = picture.querySelector('.picture__likes').textContent;
-    const commentsCount = picture.querySelector('.picture__comments').textContent;
-    const photoId = getPhotoIdFromSrc(smallImg.src);
-    const photo = findPhotoById(photoId);
+  if (!photo) {
+    bigComments.innerHTML = '';
+    return;
+  }
 
-    if (!photo) {
-      bigComments.innerHTML = '';
-      return;
-    }
+  bigImg.src = smallImg.src;
+  bigDesc.textContent = photo.description;
+  bigCountLikes.textContent = likes;
+  bigCountComments.textContent = commentsCount;
 
-    bigImg.src = smallImg.src;
-    bigDesc.textContent = photo.description;
-    bigCountLikes.textContent = likes;
-    bigCountComments.textContent = commentsCount;
-
-    if (photo.comments) {
-      renderComments(photo.comments);
-    } else {
-      bigComments.innerHTML = '';
-    }
-  };
+  if (photo.comments) {
+    renderComments(photo.comments);
+  } else {
+    bigComments.innerHTML = '';
+  }
+};
 
 const showPictureModal = () => {
   bigPicture.classList.remove('hidden');
