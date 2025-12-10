@@ -17,3 +17,8 @@ export const getPhotoIdFromSrc = (src) => {
 };
 
 export const isEscapeKey = (e) => e.key === 'Escape';
+
+export const resetCommentsState = () => {
+  currentComments = [];
+  shownCommentsCount = 0;
+}
