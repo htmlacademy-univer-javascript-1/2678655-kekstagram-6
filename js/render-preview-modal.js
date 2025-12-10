@@ -40,7 +40,7 @@ function closePicture() {
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   closeButton.removeEventListener('click', closePicture);
-  commentsLoaderButton.removeEventListener('click', onCommentsLoaderClick);
+  commentsLoaderButton.removeEventListener('click', onCommentsLoaderButtonClick);
   resetCommentsState()
 }
 
@@ -77,7 +77,7 @@ const fillPictureData = (picture) => {
     commentsLoaderButton.classList.add('hidden');
   } else {
     renderCommentsPortion();
-    commentsLoaderButton.addEventListener('click', onCommentsLoaderClick);
+    commentsLoaderButton.addEventListener('click', onCommentsLoaderButtonClick);
   }
 };
 
@@ -104,7 +104,7 @@ const onContainerClick = (event) => {
   openPicture(picture);
 };
 
-const onCommentsLoaderClick = () => {
+const onCommentsLoaderButtonClick = () => {
   shownCommentsCount += COMMENTS_STEP;
   renderCommentsPortion();
 };
