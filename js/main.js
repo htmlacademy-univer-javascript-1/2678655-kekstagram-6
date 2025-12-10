@@ -1,4 +1,5 @@
 import { renderPhotos } from './render-photos.js';
-import './render-preview-modal.js';
+import { initPreviewModal} from './render-preview-modal.js';
 
 renderPhotos();
+initPreviewModal();

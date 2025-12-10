@@ -1,5 +1,5 @@
 import { photosData } from './photos.js';
-import { isEscapeKey } from './utils.js';
+import { isEscapeKey, createCommentsHtml, getPhotoIdFromSrc } from './utils-modal.js';
 
 const container = document.querySelector('.pictures');
 const bigPicture = document.querySelector('.big-picture');
@@ -12,26 +12,9 @@ const commentCountBlock = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 const closeButton = bigPicture.querySelector('.big-picture__cancel');
 
-const getPhotoIdFromSrc = (src) => {
-  const fileName = src.split('/').pop();
-  const numberPart = fileName.split('.')[0];
-  return Number(numberPart);
-};
 
 const findPhotoById = (id) =>
   photosData.find((photo) => photo.id === id);
-
-const createCommentsHtml = (data) =>
-  data.map((item) => `
-    <li class="social__comment">
-      <img
-        class="social__picture"
-        src="${item.avatar}"
-        alt="${item.name}"
-        width="35" height="35">
-      <p class="social__text">${item.message}</p>
-    </li>
-  `).join('');
 
 const renderComments = (comments) => {
   bigComments.innerHTML = '';
@@ -44,9 +27,13 @@ function closePicture() {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
+  closeButton.removeEventListener('click', closePicture);
 }
 
 function onDocumentKeydown (event){
+  if (document.fullscreenElement && isEscapeKey(event)) {
+    return;
+  }
   if (isEscapeKey(event)) {
     closePicture();
   }
@@ -82,6 +69,7 @@ const showPictureModal = () => {
   commentsLoader.classList.add('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
+  closeButton.addEventListener('click', closePicture);
 };
 
 const openPicture = (picture) => {
@@ -89,13 +77,15 @@ const openPicture = (picture) => {
   showPictureModal();
 };
 
-closeButton.addEventListener('click', closePicture);
 
-container.addEventListener('click', (event) => {
+const onContainerClick = (event) => {
   const picture = event.target.closest('.picture');
-  if (!picture) {
-    return;
-  }
+  if (!picture) return;
+
   event.preventDefault();
   openPicture(picture);
-});
+};
+
+export const initPreviewModal = () => {
+  container.addEventListener('click', onContainerClick);
+};
