@@ -28,14 +28,11 @@ function closePicture() {
 }
 
 function onDocumentKeydown (event){
-  if (document.fullscreenElement && isEscapeKey(event)) {
-    return;
-  }
+  event.preventDefault();
   if (isEscapeKey(event)) {
     closePicture();
   }
 }
-
 const fillPictureData = (picture) => {
   const smallImg = picture.querySelector('.picture__img');
   const likes = picture.querySelector('.picture__likes').textContent;
@@ -80,7 +77,6 @@ const onContainerClick = (event) => {
   if (!picture) {
     return;
   }
-
   event.preventDefault();
   openPicture(picture);
 };
