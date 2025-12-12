@@ -1,5 +1,10 @@
-import { photosData } from './photos.js';
-import { isEscapeKey, createCommentsHtml, getPhotoIdFromSrc } from './utils-modal.js';
+import {
+  isEscapeKey,
+  getPhotoIdFromSrc,
+  renderCommentsSlice
+} from './utils-modal.js';
+import { findPhotoById } from './photos.js';
+import { COMMENTS_STEP } from './data.js';
 
 const container = document.querySelector('.pictures');
 const bigPicture = document.querySelector('.big-picture');
@@ -9,31 +14,52 @@ const bigCountComments = bigPicture.querySelector('.comments-count');
 const bigComments = bigPicture.querySelector('.social__comments');
 const bigDesc = bigPicture.querySelector('.social__caption');
 const commentCountBlock = bigPicture.querySelector('.social__comment-count');
-const commentsLoader = bigPicture.querySelector('.comments-loader');
+const commentsLoaderButton = bigPicture.querySelector('.comments-loader');
 const closeButton = bigPicture.querySelector('.big-picture__cancel');
+const body = document.body;
 
-const findPhotoById = (id) => photosData.find((photo) => photo.id === id);
+let currentComments = [];
+let shownCommentsCount = 0;
 
-const renderComments = (comments) => {
+function updateCommentsDisplay() {
+  const renderData = renderCommentsSlice(currentComments, shownCommentsCount, COMMENTS_STEP);
+
   bigComments.innerHTML = '';
-  const commentsHtml = createCommentsHtml(comments);
-  bigComments.insertAdjacentHTML('beforeend', commentsHtml);
-};
+  bigComments.insertAdjacentHTML('beforeend', renderData.commentsHtml);
+  commentCountBlock.innerHTML = renderData.commentCountHtml;
 
-function closePicture() {
-  bigPicture.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocumentKeydown);
-  closeButton.removeEventListener('click', closePicture);
+  if (renderData.isLoaderHidden) {
+    commentsLoaderButton.classList.add('hidden');
+  } else {
+    commentsLoaderButton.classList.remove('hidden');
+  }
 }
 
-function onDocumentKeydown (event){
-  event.preventDefault();
+function resetComments() {
+  currentComments = [];
+  shownCommentsCount = 0;
+}
+
+function onDocumentKeydown(event) {
   if (isEscapeKey(event)) {
+    event.preventDefault();
     closePicture();
   }
 }
-const fillPictureData = (picture) => {
+
+function closePicture() {
+  bigPicture.classList.add('hidden');
+  body.classList.remove('modal-open');
+  commentsLoaderButton.removeEventListener('click', onCommentsLoaderButtonClick);
+  resetComments();
+}
+
+function onCommentsLoaderButtonClick() {
+  shownCommentsCount += COMMENTS_STEP;
+  updateCommentsDisplay();
+}
+
+function fillPictureData(picture) {
   const smallImg = picture.querySelector('.picture__img');
   const likes = picture.querySelector('.picture__likes').textContent;
   const commentsCount = picture.querySelector('.picture__comments').textContent;
@@ -50,37 +76,40 @@ const fillPictureData = (picture) => {
   bigCountLikes.textContent = likes;
   bigCountComments.textContent = commentsCount;
 
-  if (photo.comments) {
-    renderComments(photo.comments);
-  } else {
+  currentComments = photo.comments || [];
+  shownCommentsCount = COMMENTS_STEP;
+
+  if (currentComments.length === 0) {
     bigComments.innerHTML = '';
+    commentCountBlock.classList.add('hidden');
+    commentsLoaderButton.classList.add('hidden');
+  } else {
+    updateCommentsDisplay();
+    commentsLoaderButton.addEventListener('click', onCommentsLoaderButtonClick);
   }
-};
+}
 
-const showPictureModal = () => {
+function showPictureModal() {
   bigPicture.classList.remove('hidden');
-  commentCountBlock.classList.add('hidden');
-  commentsLoader.classList.add('hidden');
-  document.body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
-  closeButton.addEventListener('click', closePicture);
-};
+  body.classList.add('modal-open');
+  document.addEventListener('keydown', onDocumentKeydown, { once: true });
+  closeButton.addEventListener('click', closePicture, { once: true });
+}
 
-const openPicture = (picture) => {
+function openPicture(picture) {
   fillPictureData(picture);
   showPictureModal();
-};
+}
 
-
-const onContainerClick = (event) => {
+function onContainerClick(event) {
   const picture = event.target.closest('.picture');
   if (!picture) {
     return;
   }
   event.preventDefault();
   openPicture(picture);
-};
+}
 
-export const initPreviewModal = () => {
+export function initPreviewModal() {
   container.addEventListener('click', onContainerClick);
-};
+}
