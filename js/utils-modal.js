@@ -18,7 +18,7 @@ export function getPhotoIdFromSrc(src){
 }
 
 export function isEscapeKey(e) {
-  return e.key === 'Escape' || e.key === 'Esc';
+  return e.key === 'Escape';
 }
 
 export function renderCommentsSlice(currentComments, shownCommentsCount) {
