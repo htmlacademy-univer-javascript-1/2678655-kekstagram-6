@@ -40,16 +40,16 @@ function resetComments() {
 }
 
 function onDocumentKeydown(event) {
-  event.preventDefault();
   if (isEscapeKey(event)) {
+    event.preventDefault();
     closePicture();
   }
 }
-
 function closePicture() {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   commentsLoaderButton.removeEventListener('click', onCommentsLoaderButtonClick);
+  document.removeEventListener('keydown', onDocumentKeydown);
   resetComments();
 }
 
@@ -91,7 +91,7 @@ function fillPictureData(picture) {
 function showPictureModal() {
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown, { once: true });
+  document.addEventListener('keydown', onDocumentKeydown);
   closeButton.addEventListener('click', closePicture, { once: true });
 }
 
