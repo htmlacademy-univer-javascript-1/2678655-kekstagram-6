@@ -1,5 +1,6 @@
 import { isEscapeKey } from './utils-modal.js';
-import { isValidateHashtags, isValidateDesc } from './validate.js';
+import { isEachTagValid,isUniqueTags,isCountHash, isDescLength,addFieldValidator } from './validate.js';
+import { pristineError } from './data.js';
 
 const overlay = document.querySelector('.img-upload__overlay');
 const uploadInput = document.querySelector('.img-upload__input');
@@ -38,14 +39,16 @@ function closeForm() {
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
-  errorTextParent: 'img-upload__field-wrapper'
+  errorTextParent: 'img-upload__field-wrapper',
+  errorTextTag: 'div'
 });
 
-pristine.addValidator(hashtagField, isValidateHashtags);
-pristine.addValidator(descField, isValidateDesc);
+addFieldValidator(pristine, hashtagField, isCountHash, pristineError[1], 3, true);
+addFieldValidator(pristine, hashtagField, isUniqueTags, pristineError[2], 2, true);
+addFieldValidator(pristine, hashtagField, isEachTagValid, pristineError[0], 1, true);
+addFieldValidator(pristine, descField, isDescLength, pristineError[3]);
 
 export function initForm() {
   uploadInput.addEventListener('change', openModal);

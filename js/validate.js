@@ -9,29 +9,28 @@ function getHashtags(value) {
     .filter((tag) => tag.length > 0);
 }
 
-export function isValidateHashtags(value) {
+export function isCountHash(value) {
   const tags = getHashtags(value);
-
-  if (tags.length === 0) {
-    return true;
-  }
-
-  const isCountTags = tags.length <= MAX_HASHTAGS;
-  const lowerTags = tags.map((tag) => tag.toLowerCase());
-  const isUnique = new Set(lowerTags).size === lowerTags.length;
-
-  const isEachTagValid = tags.every((tag) => {
-    const isLengthValid = tag.length <= MAX_HASHTAG_LENGTH;
-    const isRegexValid = HASHTAG_REGEX.test(tag);
-    return isLengthValid && isRegexValid;
-  });
-
-  return isCountTags && isUnique && isEachTagValid;
+  return tags.length <= MAX_HASHTAGS;
 }
 
-export function isValidateDesc(value) {
-  if (value.length === 0) {
-    return true;
-  }
+export function isUniqueTags(value) {
+  const tags = getHashtags(value);
+  const lowerTags = tags.map((tag) => tag.toLowerCase());
+  return new Set(lowerTags).size === lowerTags.length;
+}
+
+export function isEachTagValid(value) {
+  const tags = getHashtags(value);
+  return tags.every((tag) =>
+    tag.length <= MAX_HASHTAG_LENGTH && HASHTAG_REGEX.test(tag)
+  );
+}
+export function isDescLength(value) {
   return value.length <= MAX_DESC_LENGTH;
+}
+
+export function addFieldValidator(pristineInstance,field,validatorFn,
+  errorMessage, priority = 1, halt = true) {
+  pristineInstance.addValidator(field, validatorFn, errorMessage, priority, halt);
 }
