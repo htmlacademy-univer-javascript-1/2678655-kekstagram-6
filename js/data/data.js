@@ -5,10 +5,10 @@ export const AVATAR_COUNT = 6;
 export const LIKES_COUNT_MAX = 200;
 export const LIKES_COUNT_MIN = 15;
 export const COMMENTS_STEP = 5;
-
 export const MAX_HASHTAGS = 5;
 export const MAX_HASHTAG_LENGTH = 20;
 export const MAX_DESC_LENGTH = 140;
+
 
 export const pristineError = {
   INVALID_HASHTAG: `Хэш-тег должен начинаться с # и быть не длиннее ${MAX_HASHTAG_LENGTH} символов`,
