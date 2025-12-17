@@ -1,6 +1,6 @@
-import { PHOTO_COUNT, DESCRIPTION, LIKES_COUNT_MIN, LIKES_COUNT_MAX } from './data.js';
-import { createSequentialIdPhoto, getRandomInteger, getRandomArrayElement } from './utils.js';
-import { createComments } from './comments.js';
+import { PHOTO_COUNT, DESCRIPTION, LIKES_COUNT_MIN, LIKES_COUNT_MAX } from '../data/data.js';
+import { createSequentialIdPhoto, getRandomInteger, getRandomArrayElement } from '../utils/utils.js';
+import { createComments } from '../modules/comments.js';
 
 function createPhoto () {
   const id = createSequentialIdPhoto();
