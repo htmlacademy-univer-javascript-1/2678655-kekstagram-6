@@ -1,5 +1,5 @@
-import { getRandomArrayElement,getRandomInteger,createSequentialIdComment } from './utils.js';
-import { NAME, MESSAGE, COMMENT_COUNT, AVATAR_COUNT } from './data.js';
+import { getRandomArrayElement,getRandomInteger,createSequentialIdComment } from '../utils/utils-data.js';
+import { NAME, MESSAGE, COMMENT_COUNT, AVATAR_COUNT } from '../data/data.js';
 
 export function getRandomMessage(){
   const count = getRandomInteger(1, 2);

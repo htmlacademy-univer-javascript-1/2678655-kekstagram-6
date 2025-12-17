@@ -1,10 +1,6 @@
-import {
-  isEscapeKey,
-  getPhotoIdFromSrc,
-  createCommentsSlice
-} from './utils-modal.js';
+import { isEscapeKey, getPhotoIdFromSrc, createCommentsSlice } from '../utils/utils-modal.js';
 import { findPhotoById } from './photos.js';
-import { COMMENTS_STEP } from './data.js';
+import { COMMENTS_STEP } from '../data/data.js';
 
 const container = document.querySelector('.pictures');
 const bigPicture = document.querySelector('.big-picture');
