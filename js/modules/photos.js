@@ -1,5 +1,5 @@
 import { PHOTO_COUNT, DESCRIPTION, LIKES_COUNT_MIN, LIKES_COUNT_MAX } from '../data/data.js';
-import { createSequentialIdPhoto, getRandomInteger, getRandomArrayElement } from '../utils/utils.js';
+import { createSequentialIdPhoto, getRandomInteger, getRandomArrayElement } from '../utils/utils-data.js';
 import { createComments } from '../modules/comments.js';
 
 function createPhoto () {
