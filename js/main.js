@@ -1,8 +1,6 @@
-import { renderPhotos } from './modules/render-photos.js';
-import { initPreviewModal } from './modules/render-preview-modal.js';
+
 import { initForm } from './modules/form.js';
+import { initPhotos } from './modules/photos.js';
 
-
-renderPhotos();
-initPreviewModal();
 initForm();
+initPhotos();

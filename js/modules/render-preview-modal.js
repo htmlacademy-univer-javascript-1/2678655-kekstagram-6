@@ -1,5 +1,4 @@
-import { isEscapeKey, getPhotoIdFromSrc, createCommentsSlice } from '../utils/utils-modal.js';
-import { findPhotoById } from './photos.js';
+import { isEscapeKey, getPhotoIdFromSrc, createCommentsSlice, findPhotoById } from '../utils/utils-modal.js';
 import { COMMENTS_STEP } from '../data/data.js';
 
 const container = document.querySelector('.pictures');
@@ -14,7 +13,7 @@ const fullCountSpan = commentCountBlock.querySelector('.comments-count');
 const commentsLoaderButton = bigPicture.querySelector('.comments-loader');
 const closeButton = bigPicture.querySelector('.big-picture__cancel');
 const body = document.body;
-
+let photos;
 let currentComments = [];
 let shownCommentsCount = 0;
 
@@ -72,7 +71,7 @@ function fillPictureData(picture) {
   const likes = picture.querySelector('.picture__likes').textContent;
   const commentsCount = picture.querySelector('.picture__comments').textContent;
   const photoId = getPhotoIdFromSrc(smallImg.src);
-  const photo = findPhotoById(photoId);
+  const photo = findPhotoById(photos,photoId);
 
   if (!photo) {
     resetComments();
@@ -118,7 +117,7 @@ function onContainerClick(event) {
   event.preventDefault();
   openPicture(picture);
 }
-
-export function initPreviewModal() {
+export function initPreviewModal(data) {
+  photos = data;
   container.addEventListener('click', onContainerClick);
 }

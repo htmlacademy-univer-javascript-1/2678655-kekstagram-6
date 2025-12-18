@@ -1,13 +1,8 @@
-export const PHOTO_COUNT = 25;
-export const COMMENT_COUNT = 30;
-export const COMMENT_ID = 999;
-export const AVATAR_COUNT = 6;
-export const LIKES_COUNT_MAX = 200;
-export const LIKES_COUNT_MIN = 15;
 export const COMMENTS_STEP = 5;
 export const MAX_HASHTAGS = 5;
 export const MAX_HASHTAG_LENGTH = 20;
 export const MAX_DESC_LENGTH = 140;
+export const URL_PHOTOS = 'https://29.javascript.htmlacademy.pro/kekstagram/data';
 
 
 export const pristineError = {
@@ -17,43 +12,3 @@ export const pristineError = {
   DUPLICATE_HASHTAGS: 'Хэш-теги не должны повторяться',
   MAX_DESCRIPTION: `Поле не должно превышать ${MAX_DESC_LENGTH} символов`,
 };
-
-
-export const MESSAGE = [
-  'Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-];
-
-export const DESCRIPTION = [
-  'На отдыхе в Анапе',
-  'Ослепительное садовое кольцо',
-  'Солнечный пляж',
-  'Прогулка по летнему лесу',
-  'Захватывающий вид на горы',
-  'Тихий вечер у озера',
-  'Ночной город в огнях',
-  'Семейное празднование дня рождения',
-  'Весенний парк в цвету',
-  'Пикник на лугу с друзьями'
-];
-
-export const NAME = [
-  'Макар',
-  'Артем',
-  'Матвей',
-  'Богдан',
-  'Дмитрий',
-  'Александр',
-  'Алексей',
-  'Владимир',
-  'Иван',
-  'Никита',
-  'Михаил',
-  'Кирилл',
-  'Егор',
-  'Павел'
-];

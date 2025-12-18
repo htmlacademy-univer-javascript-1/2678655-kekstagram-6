@@ -1,5 +1,13 @@
 import { isEscapeKey } from '../utils/utils-modal.js';
-import { isEachTagValid, isUniqueTags, isCountHash, isDescLength, addFieldValidator, isNotOnlyHash } from '../utils/validate.js';
+import {
+  isTextFieldFocused,
+  addFieldValidator,
+  isNotOnlyHash,
+  isCountHash,
+  isUniqueTags,
+  isEachTagValid,
+  isDescLength
+} from '../utils/utils-validate.js';
 import { pristineError } from '../data/data.js';
 
 const overlay = document.querySelector('.img-upload__overlay');
@@ -16,20 +24,21 @@ const pristine = new Pristine(form, {
   errorTextTag: 'div'
 });
 
+addFieldValidator(pristine, hashtagField, isNotOnlyHash, pristineError.ONLY_HASH, 4, true);
+addFieldValidator(pristine, hashtagField, isCountHash, pristineError.MAX_HASHTAGS, 3, true);
+addFieldValidator(pristine, hashtagField, isUniqueTags, pristineError.DUPLICATE_HASHTAGS, 2, true);
+addFieldValidator(pristine, hashtagField, isEachTagValid, pristineError.INVALID_HASHTAG, 1, true);
+addFieldValidator(pristine, descField, isDescLength, pristineError.MAX_DESCRIPTION);
+
 function resetUploadInput() {
   uploadInput.value = '';
 }
 
 function onDocumentKeydown(event) {
-  if (isEscapeKey(event) && !isTextFieldFocused()) {
+  if (isEscapeKey(event) && !isTextFieldFocused(hashtagField, descField)) {
     event.preventDefault();
     closeForm();
   }
-}
-
-function isTextFieldFocused() {
-  const activeElement = document.activeElement;
-  return activeElement === hashtagField || activeElement === descField;
 }
 
 function openModal() {
@@ -47,12 +56,6 @@ function closeForm() {
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-addFieldValidator(pristine, hashtagField, isNotOnlyHash, pristineError.ONLY_HASH, 4, true);
-addFieldValidator(pristine, hashtagField, isCountHash, pristineError.MAX_HASHTAGS, 3, true);
-addFieldValidator(pristine, hashtagField, isUniqueTags, pristineError.DUPLICATE_HASHTAGS, 2, true);
-addFieldValidator(pristine, hashtagField, isEachTagValid, pristineError.INVALID_HASHTAG, 1, true);
-addFieldValidator(pristine, descField, isDescLength, pristineError.MAX_DESCRIPTION);
-
 export function initForm() {
   uploadInput.addEventListener('change', openModal);
 
@@ -63,4 +66,3 @@ export function initForm() {
     }
   });
 }
-

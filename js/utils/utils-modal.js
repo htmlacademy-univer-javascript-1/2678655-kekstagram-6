@@ -11,6 +11,7 @@ function createCommentHtml(comment) {
     </li>
   `;
 }
+
 export function getPhotoIdFromSrc(src){
   const fileName = src.split('/').pop();
   const numberPart = fileName.split('.')[0];
@@ -21,4 +22,8 @@ export function isEscapeKey(e) {
 }
 export function createCommentsSlice(comments) {
   return comments.map((comment) => createCommentHtml(comment)).join('');
+}
+
+export function findPhotoById(data,id) {
+  return data.find((photo) => photo.id  === id + 1);
 }

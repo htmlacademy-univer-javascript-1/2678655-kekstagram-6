@@ -2,12 +2,17 @@ import { MAX_HASHTAGS, MAX_HASHTAG_LENGTH, MAX_DESC_LENGTH } from '../data/data.
 
 const HASHTAG_REGEX = /^#[a-zа-яё0-9]+$/i;
 
-
 function getHashtags(value) {
-  return value
-    .trim()
-    .split(/\s+/)
-    .filter((tag) => tag.length > 0);
+  return value.trim().split(/\s+/).filter((tag) => tag.length > 0);
+}
+
+export function addFieldValidator(pristineInstance, field, validatorFn, errorMessage, priority = 1, halt = true) {
+  pristineInstance.addValidator(field, validatorFn, errorMessage, priority, halt);
+}
+
+export function isTextFieldFocused(fieldFirst, fieldSecond) {
+  const activeElement = document.activeElement;
+  return activeElement === fieldFirst || activeElement === fieldSecond;
 }
 
 export function isCountHash(value) {
@@ -36,9 +41,3 @@ export function isNotOnlyHash(value) {
 export function isDescLength(value) {
   return value.length <= MAX_DESC_LENGTH;
 }
-
-export function addFieldValidator(pristineInstance,field,validatorFn,
-  errorMessage, priority = 1, halt = true) {
-  pristineInstance.addValidator(field, validatorFn, errorMessage, priority, halt);
-}
-
