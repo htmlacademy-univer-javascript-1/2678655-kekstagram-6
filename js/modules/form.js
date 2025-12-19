@@ -85,7 +85,7 @@ async function handleFormSubmit(evt) {
     setSubmitButtonState(submitButton, true);
     await sendData(URL, new FormData(evt.target));
     closeForm();
-    onSuccessSend()
+    onSuccessSend();
   } catch (error) {
     hideForm();
     onErrorSend();

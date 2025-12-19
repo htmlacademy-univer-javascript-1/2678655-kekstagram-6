@@ -49,7 +49,7 @@ function showMessage(templateId, blockSelector, buttonSelector, options = {}) {
     if (!document.querySelector(`${blockSelector}__inner`).contains(evt.target)) {
       removeMessage();
     }
-  };
+  }
 
   closeButton.addEventListener('click', closeWithNewFile);
   document.addEventListener('keydown', onEscKeydown);
