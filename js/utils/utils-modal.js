@@ -11,7 +11,6 @@ function createCommentHtml(comment) {
     </li>
   `;
 }
-
 export function getPhotoIdFromSrc(src){
   const fileName = src.split('/').pop();
   const numberPart = fileName.split('.')[0];

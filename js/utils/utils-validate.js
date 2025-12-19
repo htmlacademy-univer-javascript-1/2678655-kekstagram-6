@@ -10,11 +10,6 @@ export function addFieldValidator(pristineInstance, field, validatorFn, errorMes
   pristineInstance.addValidator(field, validatorFn, errorMessage, priority, halt);
 }
 
-export function isTextFieldFocused(fieldFirst, fieldSecond) {
-  const activeElement = document.activeElement;
-  return activeElement === fieldFirst || activeElement === fieldSecond;
-}
-
 export function isCountHash(value) {
   const tags = getHashtags(value);
   return tags.length <= MAX_HASHTAGS;
