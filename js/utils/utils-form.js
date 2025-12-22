@@ -37,7 +37,6 @@ function closeMessage(element, chooseNewFile) {
   removeMessage(element);
   if (chooseNewFile) {
     uploadInput.value = '';
-    console.log('123')
     uploadInput.click();
   }
 }
