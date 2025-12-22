@@ -48,9 +48,9 @@ function resetUploadInput() {
   uploadInput.value = '';
 }
 
-function onDocumentKeydown(event) {
-  if (isEscapeKey(event) && !isTextFieldFocused(hashtagField, descField)) {
-    event.preventDefault();
+function onDocumentKeydown(evt) {
+  if (isEscapeKey(evt) && !isTextFieldFocused(hashtagField, descField)) {
+    evt.preventDefault();
     closeForm();
   }
 }
