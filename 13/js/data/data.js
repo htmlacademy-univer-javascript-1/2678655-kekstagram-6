@@ -2,7 +2,6 @@ export const COMMENTS_STEP = 5;
 export const MAX_HASHTAGS = 5;
 export const MAX_HASHTAG_LENGTH = 20;
 export const MAX_DESC_LENGTH = 140;
-export const ALERT_DELAY = 5000;
 export const URL = 'https://29.javascript.htmlacademy.pro/kekstagram';
 
 export const PristineMessage = {
@@ -13,7 +12,7 @@ export const PristineMessage = {
   MAX_DESCRIPTION: `Поле не должно превышать ${MAX_DESC_LENGTH} символов`,
 };
 
-export const ResponceMessage = {
+export const ResponseMessage = {
   GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
   SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
 };

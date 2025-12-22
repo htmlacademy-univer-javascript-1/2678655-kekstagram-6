@@ -16,14 +16,6 @@ function createPhotosFragment(data) {
   return fragment;
 }
 
-function renderErrorFragment() {
-  const errorTemplate = document
-    .querySelector('#photo-error')
-    .content
-    .querySelector('.photo-error');
-
-  container.appendChild(errorTemplate.cloneNode(true));
-}
 
 function createPhotoElement(photoTemplate, { url, description, likes, comments }) {
   const photoElement = photoTemplate.cloneNode(true);
@@ -41,10 +33,8 @@ function createPhotoElement(photoTemplate, { url, description, likes, comments }
 
 
 export function renderPhotos(data) {
-  if (Array.isArray(data) && data.length) {
-    const fragment = createPhotosFragment(data);
-    container.appendChild(fragment);
-  } else {
-    renderErrorFragment();
-  }
+  const photosData = data || [];
+  const fragment = createPhotosFragment(photosData);
+  container.appendChild(fragment);
 }
+

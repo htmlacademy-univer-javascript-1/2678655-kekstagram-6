@@ -51,9 +51,9 @@ function resetComments() {
   commentsLoaderButton.classList.add('hidden');
 }
 
-function onDocumentKeydown(event) {
-  if (isEscapeKey(event)) {
-    event.preventDefault();
+function onDocumentKeydown(evt) {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
     closePicture();
   }
 }
@@ -109,12 +109,12 @@ function openPicture(picture) {
   showPictureModal();
 }
 
-function onContainerClick(event) {
-  const picture = event.target.closest('.picture');
+function onContainerClick(evt) {
+  const picture = evt.target.closest('.picture');
   if (!picture) {
     return;
   }
-  event.preventDefault();
+  evt.preventDefault();
   openPicture(picture);
 }
 export function initPreviewModal(data) {

@@ -48,9 +48,9 @@ function resetUploadInput() {
   uploadInput.value = '';
 }
 
-function onDocumentKeydown(event) {
-  if (isEscapeKey(event) && !isTextFieldFocused(hashtagField, descField)) {
-    event.preventDefault();
+function onDocumentKeydown(evt) {
+  if (isEscapeKey(evt) && !isTextFieldFocused(hashtagField, descField)) {
+    evt.preventDefault();
     closeForm();
   }
 }
@@ -72,6 +72,7 @@ function closeForm() {
 function hideForm(){
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
+  uploadInput.value = '';
 }
 async function handleFormSubmit(evt) {
   evt.preventDefault();
