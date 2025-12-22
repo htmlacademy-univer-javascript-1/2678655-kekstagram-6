@@ -88,7 +88,7 @@ async function handleFormSubmit(evt) {
     closeForm();
     onSuccessSend();
   } catch (error) {
-    hideForm();
+    hideForm()
     onErrorSend();
   } finally {
     setSubmitButtonState(submitButton, false);

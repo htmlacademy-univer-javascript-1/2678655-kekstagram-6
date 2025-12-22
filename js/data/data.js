@@ -12,14 +12,14 @@ export const PristineMessage = {
   MAX_DESCRIPTION: `Поле не должно превышать ${MAX_DESC_LENGTH} символов`,
 };
 
-export const ResponceMessage = {
+export const ResponseMessage = {
   GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
   SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
 };
 
 export const Route = {
   GET_DATA: '/data',
-  SEND_DATA: '/1',
+  SEND_DATA: '/',
 };
 
 export const SubmitButtonText = {
