@@ -14,15 +14,14 @@ function showMessage(templateId, blockSelector, option = {}) {
 }
 
 function createMessageElement(templateId, blockSelector) {
-  const template = document.querySelector(templateId)
-    .content
-    .querySelector(blockSelector);
+  const template = document.querySelector(templateId).content.querySelector(blockSelector);
+  const element = template.cloneNode(true);
 
   if (blockSelector === '.error') {
-    Object.assign(template.style, {zIndex: '10'});
+    Object.assign(element.style, {zIndex: '10'});
   }
 
-  return template.cloneNode(true);
+  return element;
 }
 
 function setupCloseHandlers(element, blockSelector, { chooseNewFile = false } = {}) {
@@ -75,13 +74,13 @@ export function isTextFieldFocused(fieldFirst, fieldSecond) {
 }
 
 export function onSuccessSend() {
-  showMessage('#success', '.success', '.success__button', {
+  showMessage('#success', '.success', {
     chooseNewFile: false,
   });
 }
 
 export function onErrorSend() {
-  showMessage('#error', '.error', '.error__button', {
+  showMessage('#error', '.error', {
     chooseNewFile: true,
   });
 }
