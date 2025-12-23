@@ -33,7 +33,7 @@ function createPhotoElement(photoTemplate, { url, description, likes, comments }
 
 
 export function renderPhotos(data) {
-  const photosData = data || [];
+  const photosData = Array.isArray(data) ? data : [];
   const fragment = createPhotosFragment(photosData);
   container.appendChild(fragment);
 }
