@@ -1,17 +1,27 @@
 import { renderPhotos } from './render-photos.js';
 import { getData } from './api.js';
-import { URL } from '../data/data.js';
+import { DELAY, URL } from '../data/data.js';
 import { initPreviewModal } from './render-preview-modal.js';
+
+let hideTimeoutId;
 
 function showError() {
   const container = document.querySelector('.pictures');
-  const errorFragment = createErrorFragment();
-  container.appendChild(errorFragment);
+  const el = createErrorFragment();
+  container.appendChild(el);
 
-  setTimeout(() => {
-    container.removeChild(errorFragment);
-  }, 5000);
+  const startTimeout = () => {
+    hideTimeoutId = setTimeout(() => {
+      el.remove();
+    }, DELAY);
+  };
+
+  el.addEventListener('mouseenter', () => clearTimeout(hideTimeoutId));
+  el.addEventListener('mouseleave', startTimeout);
+
+  startTimeout();
 }
+
 
 function createErrorFragment() {
   const errorTemplate = document.querySelector('#photo-error')
@@ -31,11 +41,13 @@ function createErrorFragment() {
 }
 
 export async function initPhotos() {
+  let photos = [];
+
   try {
-    const photos = await getData(URL);
-    renderPhotos(photos);
-    initPreviewModal(photos);
+    photos = await getData(URL);
   } catch (error) {
     showError();
   }
+  renderPhotos(photos);
+  initPreviewModal(photos);
 }
