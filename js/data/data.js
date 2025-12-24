@@ -1,16 +1,11 @@
-export const PHOTO_COUNT = 25;
-export const COMMENT_COUNT = 30;
-export const COMMENT_ID = 999;
-export const AVATAR_COUNT = 6;
-export const LIKES_COUNT_MAX = 200;
-export const LIKES_COUNT_MIN = 15;
 export const COMMENTS_STEP = 5;
 export const MAX_HASHTAGS = 5;
 export const MAX_HASHTAG_LENGTH = 20;
 export const MAX_DESC_LENGTH = 140;
+export const DELAY = 5000;
+export const URL = 'https://29.javascript.htmlacademy.pro/kekstagram';
 
-
-export const pristineError = {
+export const PristineMessage = {
   INVALID_HASHTAG: `Хэш-тег должен начинаться с # и быть не длиннее ${MAX_HASHTAG_LENGTH} символов`,
   ONLY_HASH: 'Хэш-тег не может состоять только из символа #',
   MAX_HASHTAGS: `Не больше ${MAX_HASHTAGS} хэш-тегов`,
@@ -18,42 +13,18 @@ export const pristineError = {
   MAX_DESCRIPTION: `Поле не должно превышать ${MAX_DESC_LENGTH} символов`,
 };
 
+export const ResponseMessage = {
+  GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
+  SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
+};
 
-export const MESSAGE = [
-  'Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-];
+export const Route = {
+  GET_DATA: '/data',
+  SEND_DATA: '/',
+};
 
-export const DESCRIPTION = [
-  'На отдыхе в Анапе',
-  'Ослепительное садовое кольцо',
-  'Солнечный пляж',
-  'Прогулка по летнему лесу',
-  'Захватывающий вид на горы',
-  'Тихий вечер у озера',
-  'Ночной город в огнях',
-  'Семейное празднование дня рождения',
-  'Весенний парк в цвету',
-  'Пикник на лугу с друзьями'
-];
+export const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Опубликовываю...'
+};
 
-export const NAME = [
-  'Макар',
-  'Артем',
-  'Матвей',
-  'Богдан',
-  'Дмитрий',
-  'Александр',
-  'Алексей',
-  'Владимир',
-  'Иван',
-  'Никита',
-  'Михаил',
-  'Кирилл',
-  'Егор',
-  'Павел'
-];

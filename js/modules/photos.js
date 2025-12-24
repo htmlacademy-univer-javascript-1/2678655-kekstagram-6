@@ -1,20 +1,53 @@
-import { PHOTO_COUNT, DESCRIPTION, LIKES_COUNT_MIN, LIKES_COUNT_MAX } from '../data/data.js';
-import { createSequentialIdPhoto, getRandomInteger, getRandomArrayElement } from '../utils/utils-data.js';
-import { createComments } from '../modules/comments.js';
+import { renderPhotos } from './render-photos.js';
+import { getData } from './api.js';
+import { DELAY, URL } from '../data/data.js';
+import { initPreviewModal } from './render-preview-modal.js';
 
-function createPhoto () {
-  const id = createSequentialIdPhoto();
-  return {
-    id,
-    url: `photos/${id}.jpg`,
-    description: getRandomArrayElement(DESCRIPTION),
-    likes: getRandomInteger(LIKES_COUNT_MIN, LIKES_COUNT_MAX),
-    comments: createComments()
+let hideTimeoutId;
+
+function showError() {
+  const container = document.querySelector('.pictures');
+  const el = createErrorFragment();
+  container.appendChild(el);
+
+  const startTimeout = () => {
+    hideTimeoutId = setTimeout(() => {
+      el.remove();
+    }, DELAY);
   };
+
+  el.addEventListener('mouseenter', () => clearTimeout(hideTimeoutId));
+  el.addEventListener('mouseleave', startTimeout);
+
+  startTimeout();
 }
 
-export const photosData = Array.from({ length: PHOTO_COUNT }, createPhoto);
 
-export function findPhotoById(id) {
-  return photosData.find((photo) => photo.id === id);
+function createErrorFragment() {
+  const errorTemplate = document.querySelector('#photo-error')
+    .content
+    .querySelector('.photo-error');
+
+  const errorEl = errorTemplate.cloneNode(true);
+
+  Object.assign(errorEl.style, {
+    position: 'absolute',
+    top: '0',
+    left: '50%',
+    transform: 'translateX(-50%)'
+  });
+
+  return errorEl;
+}
+
+export async function initPhotos() {
+  let photos = [];
+
+  try {
+    photos = await getData(URL);
+  } catch (error) {
+    showError();
+  }
+  renderPhotos(photos);
+  initPreviewModal(photos);
 }

@@ -22,3 +22,7 @@ export function isEscapeKey(e) {
 export function createCommentsSlice(comments) {
   return comments.map((comment) => createCommentHtml(comment)).join('');
 }
+
+export function findPhotoById(data,id) {
+  return data.find((photo) => photo.id  === id + 1);
+}
