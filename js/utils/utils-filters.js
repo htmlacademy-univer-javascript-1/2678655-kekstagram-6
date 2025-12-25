@@ -1,4 +1,4 @@
-import { COUNT_PHOTO_RANDOM } from "../data/data";
+import { COUNT_PHOTO_RANDOM } from '../data/data.js';
 
 function filterDiscussed(photos){
   const data = photos;
