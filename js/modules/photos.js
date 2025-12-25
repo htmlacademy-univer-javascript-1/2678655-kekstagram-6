@@ -2,8 +2,10 @@ import { renderPhotos } from './render-photos.js';
 import { getData } from './api.js';
 import { DELAY, URL } from '../data/data.js';
 import { initPreviewModal } from './render-preview-modal.js';
+import { initFilters } from './filters.js';
 
 let hideTimeoutId;
+
 
 function showError() {
   const container = document.querySelector('.pictures');
@@ -48,6 +50,8 @@ export async function initPhotos() {
   } catch (error) {
     showError();
   }
+
   renderPhotos(photos);
   initPreviewModal(photos);
+  initFilters(photos);
 }

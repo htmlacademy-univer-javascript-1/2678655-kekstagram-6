@@ -3,6 +3,7 @@ export const MAX_HASHTAGS = 5;
 export const MAX_HASHTAG_LENGTH = 20;
 export const MAX_DESC_LENGTH = 140;
 export const DELAY = 5000;
+export const DEBOUNCE_DELAY = 500;
 export const URL = 'https://29.javascript.htmlacademy.pro/kekstagram';
 
 export const PristineMessage = {
