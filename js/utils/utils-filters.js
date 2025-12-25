@@ -1,3 +1,5 @@
+import { COUNT_PHOTO_RANDOM } from "../data/data";
+
 function filterDiscussed(photos){
   const data = photos;
   return data.slice().sort((a, b) => b.comments.length - a.comments.length);
@@ -7,7 +9,7 @@ function filterRandom(photos) {
   const newArray = [];
   const ids = [];
 
-  while (newArray.length < 10) {
+  while (newArray.length < COUNT_PHOTO_RANDOM) {
     const randomIndex = Math.floor(Math.random() * photos.length);
     if (!ids.includes(randomIndex)) {
       ids.push(randomIndex);
