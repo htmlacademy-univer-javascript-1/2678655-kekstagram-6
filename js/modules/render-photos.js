@@ -16,7 +16,6 @@ function createPhotosFragment(data) {
   return fragment;
 }
 
-
 function createPhotoElement(photoTemplate, { url, description, likes, comments }) {
   const photoElement = photoTemplate.cloneNode(true);
   const img = photoElement.querySelector('.picture__img');
@@ -31,6 +30,12 @@ function createPhotoElement(photoTemplate, { url, description, likes, comments }
   return photoElement;
 }
 
+export function deletePhotosFragment(){
+  const pictureList = document.querySelectorAll('.picture');
+  pictureList.forEach((el) => {
+    el.remove();
+  });
+}
 
 export function renderPhotos(data) {
   const photosData = Array.isArray(data) ? data : [];
