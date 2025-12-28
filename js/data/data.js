@@ -5,6 +5,7 @@ export const MAX_DESC_LENGTH = 140;
 export const COUNT_PHOTO_RANDOM = 10;
 export const DELAY = 5000;
 export const DEBOUNCE_DELAY = 500;
+export const DEFAULT_SCALE = 100;
 export const URL = 'https://29.javascript.htmlacademy.pro/kekstagram';
 
 export const PristineMessage = {

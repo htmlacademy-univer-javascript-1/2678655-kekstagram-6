@@ -1,20 +1,13 @@
 import { isEscapeKey } from '../utils/utils-modal.js';
 import {
-  addFieldValidator,
-  isNotOnlyHash,
-  isCountHash,
-  isUniqueTags,
-  isEachTagValid,
-  isDescLength
+  addFieldValidator, isNotOnlyHash, isCountHash,
+  isUniqueTags, isEachTagValid, isDescLength
 } from '../utils/utils-validate.js';
-import { PristineMessage, URL as API_URL } from '../data/data.js';
-import { sendData } from './api.js';
 import {
-  setSubmitButtonState,
-  isTextFieldFocused,
-  onSuccessSend,
-  onErrorSend
-} from '../utils/utils-form.js';
+  setSubmitButtonState, isTextFieldFocused,
+  onSuccessSend, onErrorSend } from '../utils/utils-form.js';
+import { PristineMessage, URL as API_URL, DEFAULT_SCALE } from '../data/data.js';
+import { sendData } from './api.js';
 
 const overlay = document.querySelector('.img-upload__overlay');
 const uploadInput = document.querySelector('.img-upload__input');
@@ -24,7 +17,10 @@ const hashtagField = form.querySelector('.text__hashtags');
 const descField = form.querySelector('.text__description');
 const submitButton = form.querySelector('.img-upload__submit');
 const imageModal = document.querySelector('.img-upload__preview img');
+const scaleControlValue = document.querySelector('.scale__control--value');
+const imgPreview = document.querySelector('.img-upload__preview img');
 const body = document.body;
+
 const {
   ONLY_HASH,
   MAX_HASHTAGS,
@@ -78,10 +74,17 @@ function openModal() {
   closeButton.addEventListener('click', closeForm, { once: true });
 }
 
+function resetScale() {
+  scaleControlValue.value = `${DEFAULT_SCALE}%`;
+  imgPreview.style.transform = `scale(${DEFAULT_SCALE / 100})`;
+}
+
 function closeForm() {
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
   form.reset();
+  resetScale()
+  pristine.reset()
   uploadInput.value = '';
   document.removeEventListener('keydown', onDocumentKeydown);
 }
