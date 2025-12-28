@@ -28,8 +28,7 @@ function showError() {
 function createErrorFragment() {
   const errorTemplate = document.querySelector('#photo-error')
     .content
-    .querySelector('.photo-error');
-
+    .querySelector('.data-error');
   const errorEl = errorTemplate.cloneNode(true);
 
   Object.assign(errorEl.style, {
@@ -42,11 +41,13 @@ function createErrorFragment() {
   return errorEl;
 }
 
+
 export async function initPhotos() {
   let photos = [];
 
   try {
     photos = await getData(URL);
+    console.log('send')
   } catch (error) {
     showError();
   }

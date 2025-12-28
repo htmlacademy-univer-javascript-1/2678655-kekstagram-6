@@ -7,7 +7,7 @@ import {
   isEachTagValid,
   isDescLength
 } from '../utils/utils-validate.js';
-import { PristineMessage, URL } from '../data/data.js';
+import { PristineMessage, URL as API_URL } from '../data/data.js';
 import { sendData } from './api.js';
 import {
   setSubmitButtonState,
@@ -23,6 +23,7 @@ const form = document.querySelector('.img-upload__form');
 const hashtagField = form.querySelector('.text__hashtags');
 const descField = form.querySelector('.text__description');
 const submitButton = form.querySelector('.img-upload__submit');
+const imageModal = document.querySelector('.img-upload__preview img');
 const body = document.body;
 const {
   ONLY_HASH,
@@ -43,6 +44,21 @@ addFieldValidator(pristine, hashtagField, isCountHash, MAX_HASHTAGS, 3, true);
 addFieldValidator(pristine, hashtagField, isUniqueTags, DUPLICATE_HASHTAGS, 2, true);
 addFieldValidator(pristine, hashtagField, isEachTagValid, INVALID_HASHTAG, 1, true);
 addFieldValidator(pristine, descField, isDescLength, MAX_DESCRIPTION);
+
+
+function onUploadChange(evt) {
+  const file = evt.target.files[0];
+  if (!file) {
+    return;
+  }
+  const blodURL = window.URL.createObjectURL(file);
+  imageModal.src = blodURL;
+
+  const effectsPreviews = document.querySelectorAll('.effects__preview');
+  effectsPreviews.forEach((preview) => {
+    preview.style.backgroundImage = `url(${blodURL})`;
+  });
+}
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt) && !isTextFieldFocused(hashtagField, descField)) {
@@ -79,7 +95,7 @@ async function handleFormSubmit(evt) {
 
   try {
     setSubmitButtonState(submitButton, true);
-    await sendData(URL, new FormData(evt.target));
+    await sendData(API_URL, new FormData(evt.target));
     closeForm();
     onSuccessSend();
   } catch (error) {
@@ -90,6 +106,9 @@ async function handleFormSubmit(evt) {
 }
 
 export function initForm() {
-  uploadInput.addEventListener('change', openModal);
+  uploadInput.addEventListener('change', (evt) => {
+    onUploadChange(evt);
+    openModal();
+  });
   form.addEventListener('submit', handleFormSubmit);
 }

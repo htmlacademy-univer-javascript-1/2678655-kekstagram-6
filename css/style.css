@@ -1201,6 +1201,7 @@ main {
 }
 
 .error__inner,
+.data-error__inner,
 .success__inner {
   position: relative;
   width: 600px;
@@ -1223,7 +1224,8 @@ main {
   border-radius: 10px;
 }
 
-.success__inner {
+.success__inner,
+.data-error__inner {
   padding: 100px 20px;
   padding-bottom: 75px;
 }

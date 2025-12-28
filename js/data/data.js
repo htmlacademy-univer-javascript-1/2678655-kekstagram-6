@@ -22,7 +22,7 @@ export const ResponseMessage = {
 
 export const Route = {
   GET_DATA: '/data',
-  SEND_DATA: '/',
+  SEND_DATA: '',
 };
 
 export const SubmitButtonText = {

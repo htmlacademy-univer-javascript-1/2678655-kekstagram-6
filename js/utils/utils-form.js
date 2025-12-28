@@ -35,7 +35,7 @@ function setupCloseHandlers(element, blockSelector, { chooseNewFile = false } = 
 function closeMessage(element, chooseNewFile) {
   removeMessage(element);
   if (chooseNewFile) {
-    uploadInput.value = '';
+    // uploadInput.value = '';
     uploadInput.click();
   }
 }

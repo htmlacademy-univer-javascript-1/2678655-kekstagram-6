@@ -7,9 +7,7 @@ export function initFilters(photos) {
   const buttonFiltersList = document.querySelectorAll('.img-filters__button');
   imgFilters.classList.remove('img-filters--inactive');
 
-  const debouncedRender = debounce((data) => {
-    renderPhotos(data);
-  }, DEBOUNCE_DELAY);
+  const debouncedRender = debounce(renderPhotos, window.Cypress ? 0 : DEBOUNCE_DELAY);
 
   imgFilters.addEventListener('click', (evt) => {
     const targetClass = evt.target.classList;
