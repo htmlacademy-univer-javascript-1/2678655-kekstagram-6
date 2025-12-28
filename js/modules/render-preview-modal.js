@@ -1,4 +1,5 @@
-import { isEscapeKey, getPhotoIdFromSrc, createCommentsSlice, findPhotoById } from '../utils/utils-modal.js';
+import { isEscapeKey, getPhotoIdFromSrc,
+  createCommentsSlice, findPhotoById } from '../utils/utils-modal.js';
 import { COMMENTS_STEP } from '../data/data.js';
 
 const container = document.querySelector('.pictures');
@@ -128,5 +129,4 @@ function onContainerClick(evt) {
 export function initPreviewModal(data) {
   photos = Array.isArray(data) ? data : [];
   container.addEventListener('click', onContainerClick);
-  // uploadInput.addEventListener('change', onUploadChange)
 }

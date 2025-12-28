@@ -7,7 +7,10 @@ export function initFilters(photos) {
   const buttonFiltersList = document.querySelectorAll('.img-filters__button');
   imgFilters.classList.remove('img-filters--inactive');
 
-  const debouncedRender = debounce(renderPhotos, window.Cypress ? 0 : DEBOUNCE_DELAY);
+  const debouncedRender = debounce((photos) => {
+    deletePhotosFragment();
+    renderPhotos(photos);
+  }, DEBOUNCE_DELAY);
 
   imgFilters.addEventListener('click', (evt) => {
     const targetClass = evt.target.classList;
@@ -22,8 +25,7 @@ export function initFilters(photos) {
       el.classList.remove('img-filters__button--active');
     });
 
-    evt.target.classList.add('img-filters__button--active');
-    deletePhotosFragment();
+    targetClass.add('img-filters__button--active');
 
     const filterFunction = filterHandlers[evt.target.id];
     const filteredPhotos = filterFunction(photos);
