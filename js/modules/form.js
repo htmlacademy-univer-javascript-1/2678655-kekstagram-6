@@ -19,15 +19,12 @@ const submitButton = form.querySelector('.img-upload__submit');
 const imageModal = document.querySelector('.img-upload__preview img');
 const scaleControlValue = document.querySelector('.scale__control--value');
 const imgPreview = document.querySelector('.img-upload__preview img');
+const effectsPreviews = document.querySelectorAll('.effects__preview');
 const body = document.body;
 
-const {
-  ONLY_HASH,
-  MAX_HASHTAGS,
-  DUPLICATE_HASHTAGS,
-  INVALID_HASHTAG,
-  MAX_DESCRIPTION
-} = PristineMessage;
+const { ONLY_HASH, MAX_HASHTAGS, DUPLICATE_HASHTAGS,
+        INVALID_HASHTAG, MAX_DESCRIPTION }
+      = PristineMessage;
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -50,7 +47,6 @@ function onUploadChange(evt) {
   const blodURL = window.URL.createObjectURL(file);
   imageModal.src = blodURL;
 
-  const effectsPreviews = document.querySelectorAll('.effects__preview');
   effectsPreviews.forEach((preview) => {
     preview.style.backgroundImage = `url(${blodURL})`;
   });

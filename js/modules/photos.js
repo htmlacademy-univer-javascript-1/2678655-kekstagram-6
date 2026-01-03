@@ -6,7 +6,6 @@ import { initFilters } from './filters.js';
 
 let hideTimeoutId;
 
-
 function showError() {
   const container = document.querySelector('.pictures');
   const el = createErrorFragment();
@@ -47,7 +46,6 @@ export async function initPhotos() {
 
   try {
     photos = await getData(URL);
-    console.log('send')
   } catch (error) {
     showError();
   }
