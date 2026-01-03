@@ -7,8 +7,9 @@ export function initFilters(photos) {
   const buttonFiltersList = document.querySelectorAll('.img-filters__button');
   imgFilters.classList.remove('img-filters--inactive');
 
-  const debouncedRender = debounce((data) => {
-    renderPhotos(data);
+  const debouncedRender = debounce((filteredPhotos) => {
+    deletePhotosFragment();
+    renderPhotos(filteredPhotos);
   }, DEBOUNCE_DELAY);
 
   imgFilters.addEventListener('click', (evt) => {
@@ -25,7 +26,6 @@ export function initFilters(photos) {
     });
 
     evt.target.classList.add('img-filters__button--active');
-    deletePhotosFragment();
 
     const filterFunction = filterHandlers[evt.target.id];
     const filteredPhotos = filterFunction(photos);
