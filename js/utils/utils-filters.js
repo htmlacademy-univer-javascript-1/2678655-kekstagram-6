@@ -4,7 +4,7 @@ function filterDiscussed(photos){
   return [...photos].sort((a, b) => b.comments.length - a.comments.length);
 }
 function filterRandom(data) {
-  const photos = [...data]
+  const photos = [...data];
   for (let i = photos.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [photos[i], photos[j]] = [photos[j], photos[i]];
