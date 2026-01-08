@@ -3,15 +3,14 @@ import { COUNT_PHOTO_RANDOM } from '../data/data.js';
 function filterDiscussed(photos){
   return [...photos].sort((a, b) => b.comments.length - a.comments.length);
 }
-function filterRandom(data) {
-  const photos = [...data];
-  for (let i = photos.length - 1; i > 0; i--) {
+function filterRandom(photos) {
+  const data = [...photos];
+  for (let i = data.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [photos[i], photos[j]] = [photos[j], photos[i]];
+    [data[i], data[j]] = [data[j], data[i]];
   }
-  return photos.slice(0,COUNT_PHOTO_RANDOM);
+  return data.slice(0,COUNT_PHOTO_RANDOM);
 }
-
 
 function filterDefault(photos){
   return photos;
