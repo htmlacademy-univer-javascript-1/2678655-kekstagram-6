@@ -1,23 +1,17 @@
 import { COUNT_PHOTO_RANDOM } from '../data/data.js';
 
 function filterDiscussed(photos){
-  const data = photos;
-  return data.slice().sort((a, b) => b.comments.length - a.comments.length);
+  return [...photos].sort((a, b) => b.comments.length - a.comments.length);
 }
-
-function filterRandom(photos) {
-  const newArray = [];
-  const ids = [];
-
-  while (newArray.length < COUNT_PHOTO_RANDOM) {
-    const randomIndex = Math.floor(Math.random() * photos.length);
-    if (!ids.includes(randomIndex)) {
-      ids.push(randomIndex);
-      newArray.push(photos[randomIndex]);
-    }
+function filterRandom(data) {
+  const photos = [...data]
+  for (let i = photos.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [photos[i], photos[j]] = [photos[j], photos[i]];
   }
-  return newArray;
+  return photos.slice(0,COUNT_PHOTO_RANDOM);
 }
+
 
 function filterDefault(photos){
   return photos;
