@@ -22,9 +22,7 @@ const imgPreview = document.querySelector('.img-upload__preview img');
 const effectsPreviews = document.querySelectorAll('.effects__preview');
 const body = document.body;
 
-const { ONLY_HASH, MAX_HASHTAGS, DUPLICATE_HASHTAGS,
-        INVALID_HASHTAG, MAX_DESCRIPTION }
-      = PristineMessage;
+const { ONLY_HASH, MAX_HASHTAGS, DUPLICATE_HASHTAGS, INVALID_HASHTAG, MAX_DESCRIPTION } = PristineMessage;
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -79,8 +77,8 @@ function closeForm() {
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
   form.reset();
-  resetScale()
-  pristine.reset()
+  resetScale();
+  pristine.reset();
   uploadInput.value = '';
   document.removeEventListener('keydown', onDocumentKeydown);
 }

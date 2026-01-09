@@ -90,7 +90,6 @@ function fillPictureData(picture) {
   shownCommentsCount = 0;
   bigComments.innerHTML = '';
 
-  const commentCountBlock = bigPicture.querySelector('.social__comment-count');
   commentCountBlock.innerHTML = `
     <span class="social__comment-shown-count">${shownCommentsCount}</span> из
     <span class="social__comment-total-count">${currentComments.length}</span> комментариев
