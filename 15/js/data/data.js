@@ -1,0 +1,33 @@
+export const COMMENTS_STEP = 5;
+export const MAX_HASHTAGS = 5;
+export const MAX_HASHTAG_LENGTH = 20;
+export const MAX_DESC_LENGTH = 140;
+export const COUNT_PHOTO_RANDOM = 10;
+export const DELAY = 5000;
+export const DEBOUNCE_DELAY = 500;
+export const DEFAULT_SCALE = 100;
+export const URL = 'https://29.javascript.htmlacademy.pro/kekstagram';
+
+export const PristineMessage = {
+  INVALID_HASHTAG: `Хэш-тег должен начинаться с # и быть не длиннее ${MAX_HASHTAG_LENGTH} символов`,
+  ONLY_HASH: 'Хэш-тег не может состоять только из символа #',
+  MAX_HASHTAGS: `Не больше ${MAX_HASHTAGS} хэш-тегов`,
+  DUPLICATE_HASHTAGS: 'Хэш-теги не должны повторяться',
+  MAX_DESCRIPTION: `Поле не должно превышать ${MAX_DESC_LENGTH} символов`,
+};
+
+export const ResponseMessage = {
+  GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
+  SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
+};
+
+export const Route = {
+  GET_DATA: '/data',
+  SEND_DATA: '',
+};
+
+export const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Опубликовываю...'
+};
+
