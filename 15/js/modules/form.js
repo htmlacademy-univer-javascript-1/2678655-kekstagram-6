@@ -42,13 +42,20 @@ function onUploadChange(evt) {
   if (!file) {
     return;
   }
-  const blodURL = window.URL.createObjectURL(file);
-  imageModal.src = blodURL;
+  const oldUrl = imageModal.src;
+
+  const blobURL = window.URL.createObjectURL(file);
+  imageModal.src = blobURL;
 
   effectsPreviews.forEach((preview) => {
-    preview.style.backgroundImage = `url(${blodURL})`;
+    preview.style.backgroundImage = `url(${blobURL})`;
   });
+
+  if (oldUrl && oldUrl.startsWith('blob:')) {
+    window.URL.revokeObjectURL(oldUrl);
+  }
 }
+
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt) && !isTextFieldFocused(hashtagField, descField)) {
