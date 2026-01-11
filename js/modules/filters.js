@@ -25,7 +25,7 @@ export function initFilters(photos) {
       el.classList.remove('img-filters__button--active');
     });
 
-    evt.target.classList.add('img-filters__button--active');
+    targetClass.add('img-filters__button--active');
 
     const filterFunction = filterHandlers[evt.target.id];
     const filteredPhotos = filterFunction(photos);

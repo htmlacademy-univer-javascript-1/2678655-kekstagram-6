@@ -1,4 +1,5 @@
-import { isEscapeKey, getPhotoIdFromSrc, createCommentsSlice, findPhotoById } from '../utils/utils-modal.js';
+import { isEscapeKey, getPhotoIdFromSrc,
+  createCommentsSlice, findPhotoById } from '../utils/utils-modal.js';
 import { COMMENTS_STEP } from '../data/data.js';
 
 const container = document.querySelector('.pictures');
@@ -9,7 +10,6 @@ const bigCountComments = bigPicture.querySelector('.comments-count');
 const bigComments = bigPicture.querySelector('.social__comments');
 const bigDesc = bigPicture.querySelector('.social__caption');
 const commentCountBlock = bigPicture.querySelector('.social__comment-count');
-const fullCountSpan = commentCountBlock.querySelector('.comments-count');
 const commentsLoaderButton = bigPicture.querySelector('.comments-loader');
 const closeButton = bigPicture.querySelector('.big-picture__cancel');
 const body = document.body;
@@ -17,9 +17,12 @@ let photos;
 let currentComments = [];
 let shownCommentsCount = 0;
 
+
 function updateCommentCounter(visibleCount, totalCount) {
-  fullCountSpan.textContent = totalCount;
-  commentCountBlock.firstChild.textContent = `${visibleCount} из `;
+  const shownSpan = commentCountBlock.querySelector('.social__comment-shown-count');
+  const totalSpan = commentCountBlock.querySelector('.social__comment-total-count');
+  shownSpan.textContent = visibleCount;
+  totalSpan.textContent = totalCount;
 }
 
 function appendCommentsSlice() {
@@ -78,7 +81,7 @@ function fillPictureData(picture) {
     return;
   }
 
-  bigImg.src = smallImg.src;
+  bigImg.src = photo.url;
   bigDesc.textContent = photo.description;
   bigCountLikes.textContent = likes;
   bigCountComments.textContent = commentsCount;
@@ -86,6 +89,11 @@ function fillPictureData(picture) {
   currentComments = photo.comments || [];
   shownCommentsCount = 0;
   bigComments.innerHTML = '';
+
+  commentCountBlock.innerHTML = `
+    <span class="social__comment-shown-count">${shownCommentsCount}</span> из
+    <span class="social__comment-total-count">${currentComments.length}</span> комментариев
+  `;
 
   if (currentComments.length === 0) {
     resetComments();

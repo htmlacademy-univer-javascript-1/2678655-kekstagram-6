@@ -1,5 +1,3 @@
-const container = document.querySelector('.pictures');
-
 function createPhotosFragment(data) {
   const photoTemplate = document
     .querySelector('#picture')
@@ -38,6 +36,7 @@ export function deletePhotosFragment(){
 }
 
 export function renderPhotos(data) {
+  const container = document.querySelector('.pictures');
   const photosData = Array.isArray(data) ? data : [];
   const fragment = createPhotosFragment(photosData);
   container.appendChild(fragment);

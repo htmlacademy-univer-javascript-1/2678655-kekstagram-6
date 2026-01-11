@@ -24,5 +24,5 @@ export function createCommentsSlice(comments) {
 }
 
 export function findPhotoById(data,id) {
-  return data.find((photo) => photo.id  === id + 1);
+  return data.find((photo) => photo.id === id - 1);
 }
